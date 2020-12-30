@@ -12,6 +12,16 @@ import { DashboardRoutes } from "./dashboard.routing";
 import { AnalyticsComponent } from "./analytics/analytics.component";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 
+import { StudentComponent } from './student/student.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { FeesComponent } from './fees/fees.component';
+import { CaffeComponent } from './caffe/caffe.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { InquiryComponent } from './inquiry/inquiry.component';
+import { ClassComponent } from './class/class.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,9 +32,11 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
     NgxDatatableModule,
     SharedPipesModule,
     PerfectScrollbarModule,
-    RouterModule.forChild(DashboardRoutes)
+    RouterModule.forChild(DashboardRoutes),
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
-  declarations: [AnalyticsComponent],
+  declarations: [AnalyticsComponent, StudentComponent, EmployeeComponent, FeesComponent, CaffeComponent, AttendanceComponent, InquiryComponent, ClassComponent],
   exports: []
 })
 export class DashboardModule {}

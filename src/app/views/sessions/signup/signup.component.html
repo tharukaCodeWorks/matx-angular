@@ -28,7 +28,8 @@
     <!-- Right side content -->
    <div fxFlex="60" fxLayout="row wrap" fxLayoutAlign="center center">
     <form  [formGroup]="signupForm" class="signup4-form white" (ngSubmit)="onSubmit()">
-        
+      <div *ngIf="loginSuccess" style="background-color: rgb(158, 255, 223); color: rgb(0, 141, 94); padding: 10px; border-radius: 4px; margin-bottom: 20px;">User registration successful!</div>
+      <div *ngIf="loginFailed" style="background-color: rgb(250, 167, 167); color:rgb(158, 0, 0); padding: 10px; border-radius: 4px; margin-bottom: 20px;">User registration failed. Please try again with different email address!</div>
       <mat-form-field class="full-width" appearance="outline">
           <mat-label>Username</mat-label>
           <input

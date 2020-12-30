@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { CustomValidators } from "ngx-custom-validators";
 import { matxAnimations } from "app/shared/animations/matx-animations";
+import { JwtAuthService } from "app/shared/services/auth/jwt-auth.service";
 
 @Component({
   selector: "app-signup",
@@ -16,8 +17,10 @@ import { matxAnimations } from "app/shared/animations/matx-animations";
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  loginSuccess: boolean = false;
+  loginFailed: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private jwtAuthService:JwtAuthService) {}
 
   ngOnInit() {
     const password = new FormControl("", Validators.required);
@@ -36,8 +39,20 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     if (!this.signupForm.invalid) {
+      this.loginSuccess = false;
+      this.loginFailed = false;
+
+      this.jwtAuthService.signup(
+        this.signupForm.get("username").value,
+        this.signupForm.get("email").value,
+        this.signupForm.get("password").value
+      ).subscribe(res=>{
+        this.loginSuccess = true;
+      }, error=>{
+        this.loginFailed = true;
+      });
       // do what you wnat with your data
-      console.log(this.signupForm.value);
+      // console.log(res);
     }
   }
 }

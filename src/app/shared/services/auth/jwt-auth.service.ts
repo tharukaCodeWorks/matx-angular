@@ -37,11 +37,15 @@ export class JwtAuthService {
   ) {}
 
   public signin(username, password) {
-    return of({token: DEMO_TOKEN, user: DEMO_USER})
+
+    this.signingIn = true;
+    const formData = new FormData();
+    formData.append('email', username);
+    formData.append('password', password);
+    return this.http.post(`${environment.apiURL}/login`, formData)
       .pipe(
-        delay(1000),
         map((res: any) => {
-          this.setUserAndToken(res.token, res.user, !!res);
+          this.setUserAndToken(res.access_token, {}, !!res);
           this.signingIn = false;
           return res;
         }),
@@ -49,21 +53,24 @@ export class JwtAuthService {
           return throwError(error);
         })
       );
+  }
 
-    // FOLLOWING CODE SENDS SIGNIN REQUEST TO SERVER
-
-    // this.signingIn = true;
-    // return this.http.post(`${environment.apiURL}/auth/local`, { username, password })
-    //   .pipe(
-    //     map((res: any) => {
-    //       this.setUserAndToken(res.token, res.user, !!res);
-    //       this.signingIn = false;
-    //       return res;
-    //     }),
-    //     catchError((error) => {
-    //       return throwError(error);
-    //     })
-    //   );
+  public signup(username, email, password){
+    const formData = new FormData();
+    formData.append('name', username);
+    formData.append('email', email);
+    formData.append('password', password);
+    return this.http.post(`${environment.apiURL}/register`, formData)
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          return res;
+        }),
+        catchError((error) => {
+          console.log(error);
+          return throwError(error);
+        })
+      );
   }
 
   /*

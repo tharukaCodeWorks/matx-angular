@@ -23,6 +23,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 
 
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };

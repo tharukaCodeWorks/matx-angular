@@ -37,103 +37,60 @@ export class NavigationService {
       state: "dashboard/analytics"
     },
     {
-      name: "PAGES",
+      name: "CONTROLLS",
       type: "separator"
     },
     {
-      name: "Sessions",
-      type: "dropDown",
-      tooltip: "Pages",
+      name: "Students",
+      type: "link",
+      tooltip: "Students",
       icon: "how_to_reg",
-      state: "sessions",
-      badges: [{color: 'primary', value: '6'}],
-      sub: [
-        { name: "Sign up", state: "signup" },
-        { name: "Sign in", state: "signin" },
-        { name: "Forgot", state: "forgot-password" },
-        { name: "Lock screen", state: "lockscreen" },
-        { name: "Not Found", state: "404" },
-        { name: "Error", state: "error" }
-      ]
+      state: "dashboard/students",
     },
     {
-      name: "Blank Page",
+      name: "Employees",
       type: "link",
-      icon: "check_box_outline_blank",
-      state: "pages/blank"
+      icon: "people",
+      state: "dashboard/employees"
     },
     {
-      name: "COMPONENTS",
-      type: "separator"
-    },
-    {
-      name: "Forms",
-      type: "dropDown",
-      tooltip: "Forms",
-      icon: "description",
-      state: "forms",
-      sub: [
-        { name: "Basic", state: "basic" },
-        { name: "Editor", state: "editor" },
-        { name: "Upload", state: "upload" },
-        { name: "Wizard", state: "wizard" }
-      ]
-    },
-    {
-      name: "Data Table",
+      name: "Fees",
       type: "link",
-      tooltip: "Tables",
-      icon: "format_line_spacing",
-      state: "tables/mat-table"
+      tooltip: "Fees",
+      icon: "money",
+      state: "dashboard/fees"
     },
     {
-      name: "Material Kit",
+      name: "Cafe",
       type: "link",
-      icon: "move_to_inbox",
-      state: "mat-kits"
+      icon: "coffee",
+      state: "dashboard/caffe"
     },
     {
-      name: "OTHERS",
-      type: "separator"
-    },
-    {
-      name: "Icons",
+      name: "Attendance",
       type: "link",
-      tooltip: "Material Icons",
-      icon: "store",
-      state: "icons"
+      tooltip: "Attendance",
+      icon: "list",
+      state: "dashboard/attendance"
     },
     {
-      name: "Multi Level",
-      type: "dropDown",
-      tooltip: "Multi Level",
+      name: "Inquiry",
+      type: "link",
+      tooltip: "Inquiry",
       icon: "format_align_center",
-      state: "",
-      sub: [
-        {
-          name: "Level Two",
-          type: "dropDown",
-          state: "fake-1",
-          sub: [
-            { name: "Level Three", state: "fake-2" },
-            { name: "Level Three", state: "fake-3" }
-          ]
-        },
-        { name: "Level Two", state: "fake-4" },
-        { name: "Level Two", state: "fake-5" }
-      ]
+      state: "dashboard/inquiry",
     },
     {
-      name: "Documentation",
-      type: "extLink",
+      name: "Class",
+      type: "link",
       icon: "library_books",
-      state: "http://demos.ui-lib.com/matx-angular-doc/"
+      state: "dashboard/class"
     },
     {
-      name: "Upgrade to PRO",
-      type: "extLink",
+      name: "Reports",
+      type: "link",
       icon: "present_to_all",
-      state: "http://matx-angular.ui-lib.com"
+      state: "dashboard/reports"
     }
   ];
 

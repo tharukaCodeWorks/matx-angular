@@ -1,0 +1,134 @@
+<mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="New">
+        <form
+        class="signup4-form"
+        [formGroup]="employee"
+        (ngSubmit)="newEmployee()"
+      >
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input
+                      matInput
+                      formControlName="name"
+                      type="text"
+                      name="name"
+                      placeholder="First Name"
+                    />
+                  </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Designation</mat-label>
+                    <mat-select formControlName="designation"
+                    name="designation">
+                        <mat-option value="1">
+                            Hello
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="department"
+                    name="department">
+                        <mat-option value="1">
+                            Hello
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input
+                      matInput
+                      formControlName="address"
+                      type="text"
+                      name="address"
+                      placeholder="Address"
+                    />
+                  </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Contact</mat-label>
+                    <input
+                      matInput
+                      formControlName="contact"
+                      type="text"
+                      name="contact"
+                      placeholder="contact"
+                    />
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <button mat-raised-button color="primary">{{editMode?'Save':'Create'}}</button>
+        <button *ngIf="editMode" style="margin-left: 10px;" (click)="cancelEditMode()" mat-raised-button color="warn">Cancel</button>
+      </form>
+    </mat-tab>
+
+
+    <mat-tab label="Employee List">
+        <div class="ml-05 mr-05 mt-05 pb-1">
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort >
+          
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="id"> {{row.employee_id}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="name">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.name}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="address">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="name"> {{row.address}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="contact">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>
+                      <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.contact}} </mat-cell>
+                    </ng-container>
+          
+                    <ng-container matColumnDef="designation">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Designation </mat-header-cell>
+                      <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.designation}} </mat-cell>
+                    </ng-container>
+          
+                    <ng-container matColumnDef="department">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Department </mat-header-cell>
+                      <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.department}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> 
+                            <button mat-icon-button color="primary" aria-label="Edit" (click)="updateSelect(row)">
+                                <mat-icon>edit</mat-icon>   
+                            </button>
+                            <button mat-icon-button color="warn" (click)="deleteEmployee(row.employee_id)" aria-label="Delete">
+                                <mat-icon>delete</mat-icon>   
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                    
+                    <mat-header-row *matHeaderRowDef="dataColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: dataColumns;">
+                    </mat-row>
+                </mat-table>
+                
+            </div>
+          </div>
+          
+    </mat-tab>
+  </mat-tab-group>
