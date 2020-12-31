@@ -1,4 +1,64 @@
-<mat-tab-group>
-    <mat-tab label="New">New</mat-tab>
-    <mat-tab label="All Inqueries">Students</mat-tab>
-</mat-tab-group>
+<mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="New">
+        <form
+        [formGroup]="class"
+        class="signup4-form"
+        (ngSubmit)="newClass()"
+      >
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Inquerry</mat-label>
+                    <input
+                      matInput
+                      formControlName="inquiry"
+                      type="text"
+                      name="inquiry"
+                      placeholder="Inquiry"
+                    />
+                  </mat-form-field>
+            </div>
+        </div>
+        <button mat-raised-button color="primary">{{editMode?'Save':'Create'}}</button>
+        <button *ngIf="editMode" style="margin-left: 10px;" (click)="cancelEditMode()" mat-raised-button color="warn">Cancel</button>
+      </form>
+    </mat-tab>
+
+
+    <mat-tab label="Inquiry List">
+        <div class="ml-05 mr-05 mt-05 pb-1">
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort >
+          
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="inquiry">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Inquiry </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.inquiry}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> 
+                            <button mat-icon-button color="primary" aria-label="Edit" (click)="updateSelect(row)">
+                                <mat-icon>edit</mat-icon>   
+                            </button>
+                            <button mat-icon-button color="warn" aria-label="Delete">
+                                <mat-icon>delete</mat-icon>   
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                    
+                    <mat-header-row *matHeaderRowDef="dataColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: dataColumns;">
+                    </mat-row>
+                </mat-table>
+                
+            </div>
+          </div>
+          
+    </mat-tab>
+  </mat-tab-group>
