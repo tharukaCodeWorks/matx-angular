@@ -28,11 +28,12 @@ export class FeesComponent implements OnInit {
   constructor(private http:HttpClient, private snackBar:MatSnackBar) {}
 
   updateSelect(data){
-    console.log(this.selectedIndex);
-    console.log("Cliecked");
     this.selectedIndex = 0;
     this.editMode = true;
     this.editingObject = data;
+    this.fee.patchValue({
+      ...data
+    });
   }
 
   getAllFees(){
@@ -76,7 +77,7 @@ export class FeesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "stud_id", "amount", "date"];
+    this.dataColumns = ["id", "stud_id", "amount", "date", "action"];
     this.getAllFees();
   }
 

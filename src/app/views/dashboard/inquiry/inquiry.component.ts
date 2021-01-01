@@ -15,6 +15,7 @@ export class InquiryComponent implements OnInit {
   editMode = false;
   editingObject = {};
   class = new FormGroup({
+    id: new FormControl('', Validators.required),
     inquiry: new FormControl('', Validators.required)
   })
 
@@ -28,6 +29,9 @@ export class InquiryComponent implements OnInit {
     this.selectedIndex = 0;
     this.editMode = true;
     this.editingObject = data;
+    this.class.patchValue({
+      ...data
+    });
   }
 
   getAllClasses(){
@@ -40,8 +44,16 @@ export class InquiryComponent implements OnInit {
     this.editMode = false;
   }
 
+  deleteFee(id){
+    this.http.delete(`${config.apiUrl}/inquires/${id}`).subscribe(res=>{
+      this.getAllClasses();
+      this.snackBar.open("Deleted", "Ok", {duration:2000});
+    });
+  }
+
   newClass(){
     let data = {
+      id: this.class.get("id").value,
       inquiry: this.class.get("inquiry").value
     };
 
@@ -53,7 +65,7 @@ export class InquiryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "inquiry"];
+    this.dataColumns = ["id", "inquiry", "action"];
     this.getAllClasses();
   }
 

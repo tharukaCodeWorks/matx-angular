@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "mss-esoft": {
+      "hosting": {
+        "matx": [
+          "mss-esoft"
+        ]
+      }
+    }
+  }
+}

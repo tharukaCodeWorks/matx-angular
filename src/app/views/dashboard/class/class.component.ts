@@ -12,7 +12,7 @@ import { config } from 'config';
 export class ClassComponent implements OnInit {
   selectedIndex = 1;
   editMode = false;
-  editingObject = {};
+  editingObject:any = {};
   class = new FormGroup({
     name: new FormControl('', Validators.required)
   })
@@ -29,6 +29,16 @@ export class ClassComponent implements OnInit {
     this.selectedIndex = 0;
     this.editMode = true;
     this.editingObject = data;
+    this.class.patchValue({
+      ...data
+    });
+  }
+
+  deleteEmployee(id){
+    this.http.delete(`${config.apiUrl}/classes/${id}`).subscribe((res:any)=>{
+      this.getAllClasses();
+      this.snackBar.open("Deleted Successfully", "Ok", {duration:2000})
+    })
   }
 
   getAllClasses(){
@@ -45,16 +55,29 @@ export class ClassComponent implements OnInit {
     let data = {
       name: this.class.get("name").value
     };
-
-    this.http.post(`${config.apiUrl}/classes`, data).subscribe(res=>{
-      this.getAllClasses();
-      this.snackBar.open("Created", "Ok", {duration:2000});
-      this.class.reset();
-    });
+    
+    if(this.editMode){
+      data['_method'] = "PUT";
+      data['id'] = this.editingObject.id;
+      this.http.post(`${config.apiUrl}/classes/${this.editingObject.id}`, data).subscribe(res=>{
+        this.getAllClasses();
+        this.snackBar.open("Created", "Ok", {duration:2000});
+        this.class.reset();
+        this.editMode = false;
+      });
+    }else{
+      this.http.post(`${config.apiUrl}/classes`, data).subscribe(res=>{
+        this.getAllClasses();
+        this.snackBar.open("Created", "Ok", {duration:2000});
+        this.class.reset();
+        this.editMode = false;
+      });
+    }
+    
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "name"];
+    this.dataColumns = ["id", "name", "action"];
     this.getAllClasses();
   }
 

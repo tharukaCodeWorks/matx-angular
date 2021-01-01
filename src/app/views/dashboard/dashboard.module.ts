@@ -21,6 +21,8 @@ import { InquiryComponent } from './inquiry/inquiry.component';
 import { ClassComponent } from './class/class.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ReportsComponent } from './reports/reports/reports.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   imports: [
@@ -34,9 +36,10 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     PerfectScrollbarModule,
     RouterModule.forChild(DashboardRoutes),
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxChartsModule
   ],
-  declarations: [AnalyticsComponent, StudentComponent, EmployeeComponent, FeesComponent, CaffeComponent, AttendanceComponent, InquiryComponent, ClassComponent],
+  declarations: [AnalyticsComponent, StudentComponent, EmployeeComponent, FeesComponent, CaffeComponent, AttendanceComponent, InquiryComponent, ClassComponent, ReportsComponent],
   exports: []
 })
 export class DashboardModule {}

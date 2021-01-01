@@ -8,6 +8,9 @@ import { matxAnimations } from "app/shared/animations/matx-animations";
 import { ThemeService } from "app/shared/services/theme.service";
 import tinyColor from "tinycolor2";
 import PerfectScrollbar from "perfect-scrollbar";
+import { HttpClient } from "@angular/common/http";
+import { config } from "config";
+import * as moment from 'moment';
 
 @Component({
   selector: "app-analytics",
@@ -20,6 +23,9 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
   trafficVsSale: any;
   trafficData: any;
   saleData: any;
+
+  fromDateThisMonth = '2020-12-01';
+  toDateThisMonth = '2020-12-30';
 
   sessionOptions: any;
   sessions: any;
@@ -36,101 +42,73 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
   statCardList = [
     {
       icon: "people",
-      title: "New Leads",
+      title: "Number of Students",
       amount: "3,050",
       color: "primary"
     },
     {
-      icon: "attach_money",
-      title: "This week Sales",
-      amount: "$80,500",
+      icon: "money",
+      title: "Expenses",
+      amount: "This month expense",
       color: "primary"
-    },
-    {
-      icon: "store",
-      title: "Inventory Status",
-      amount: "8.5% Stock Surplus",
-      color: "accent"
     },
     {
       icon: "shopping_cart",
       title: "Orders to deliver",
       amount: "305 Orders",
-      color: "accent"
+      color: "primary"
     }
   ];
 
-  productList = [
-    {
-      imgUrl: "assets/images/products/headphone-2.jpg",
-      name: "earphone",
-      price: 100,
-      available: 15
-    },
-    {
-      imgUrl: "assets/images/products/headphone-3.jpg",
-      name: "earphone",
-      price: 1500,
-      available: 30
-    },
-    {
-      imgUrl: "assets/images/products/iphone-2.jpg",
-      name: "iPhone x",
-      price: 1900,
-      available: 35
-    },
-    {
-      imgUrl: "assets/images/products/iphone-1.jpg",
-      name: "iPhone x",
-      price: 100,
-      available: 0
-    },
-    {
-      imgUrl: "assets/images/products/headphone-3.jpg",
-      name: "Head phone",
-      price: 1190,
-      available: 5
-    }
-  ];
+  lastMonthIncome = [];
+  lastMonthDates = [];
 
-  onGoingProjectList = [
-    {
-      icon: "start_border",
-      color: "warn",
-      title: "project 1"
-    },
-    {
-      icon: "date_range",
-      color: "primary",
-      title: "project 2"
-    },
-    {
-      icon: "start_border",
-      color: "warn",
-      title: "project 3"
-    },
-    {
-      icon: "date_range",
-      color: "accent",
-      title: "project 4"
-    }
-  ];
+  getInstituteIncome(){
+    this.http.get(`${config.apiUrl}/reports/institute/income?dateFrom=01-01-2020&dateTo=30-12-2020`).subscribe((res:any)=>{
+      var prevMonth = moment().subtract(1, 'month').startOf('month');
+      console.log(prevMonth);
+      var prevMonthDays = prevMonth.daysInMonth();  
+      var prevMonthDates = [];
+      for (var i = 0; i < prevMonthDays; i++) {
+        var prevMonthDay = prevMonth.clone().add(i, 'days').format("YYYY-MM-DD");
+        console.log(prevMonthDay);
+        let searchDay = res.data.filter(item=>item.date==prevMonthDay);
+        searchDay.forEach(incom=>{
+          if(incom.sale_price==undefined){
+            this.lastMonthIncome.push(incom.amount);
+          }else{
+            this.lastMonthIncome.push(incom.sale_price);
+          }
+        });
+        if(searchDay.length==0){
+          this.lastMonthIncome.push(0);
+        }
+        this.lastMonthDates.push(i+1)
+      }
+      this.initDailyTrafficChartBar(this.themeService.activatedTheme);
+      this.statCardList.push(
+        {
+          icon: "attach_money",
+          title: "This Month Sales",
+          amount: `$${res.totalIncome}`,
+          color: "primary"
+        },
+      )
+    });
+  }
 
-  displayedColumns: string[] = ["name", "price", "available", "action"];
-
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: ThemeService, private http:HttpClient) {}
 
   ngAfterViewInit() {}
   ngOnInit() {
-    this.themeService.onThemeChange.subscribe(activeTheme => {
-      this.initDoughNutPieOptions(activeTheme);
-      this.initDailyTrafficChartBar(activeTheme);
-    });
-    this.initDailyTrafficChartBar(this.themeService.activatedTheme);
+
+    // this.initDailyTrafficChartBar(this.themeService.activatedTheme);
+    this.getInstituteIncome();
     this.initDoughNutPieOptions(this.themeService.activatedTheme);
   }
 
   initDoughNutPieOptions(theme) {
+    console.log("Chart Activated");
     this.doughNutPieOptions = {
       backgroundColor: "transparent",
       color: [
@@ -212,11 +190,11 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
           data: [
             {
               value: 65,
-              name: "Google"
+              name: "Class Fees"
             },
             {
               value: 20,
-              name: "Facebook"
+              name: "Caffe"
             },
             { value: 15, name: "Others" }
           ],
@@ -258,7 +236,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
       },
       series: [
         {
-          data: [34, 45, 31, 45, 31, 43, 26, 43, 31, 45, 33, 40],
+          data: [...this.lastMonthIncome],
           type: "line",
           areaStyle: {},
           smooth: true,
@@ -274,18 +252,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
         showGrid: false,
         boundaryGap: false,
         data: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
+          ...this.lastMonthDates
         ],
         axisLabel: {
           color: "#ccc",
@@ -301,7 +268,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
       yAxis: {
         type: "value",
         min: 10,
-        max: 60,
+        max: 10000,
         axisLabel: {
           color: "#ccc",
           margin: 20,

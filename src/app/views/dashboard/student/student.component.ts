@@ -85,7 +85,7 @@ export class StudentComponent implements OnInit {
         this.editMode = false;
       });
     } else {
-      this.http.post(`${config.apiUrl}/students}`, submitData).subscribe(res=>{
+      this.http.post(`${config.apiUrl}/students`, submitData).subscribe(res=>{
         this.getAllStudents();
         this.snackBar.open("Inserted new Student", "Ok", this.snackConfig);
         this.student.reset();

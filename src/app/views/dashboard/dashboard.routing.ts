@@ -7,6 +7,7 @@ import { ClassComponent } from "./class/class.component";
 import { EmployeeComponent } from "./employee/employee.component";
 import { FeesComponent } from "./fees/fees.component";
 import { InquiryComponent } from "./inquiry/inquiry.component";
+import { ReportsComponent } from "./reports/reports/reports.component";
 import { StudentComponent } from "./student/student.component";
 
 export const DashboardRoutes: Routes = [
@@ -45,5 +46,9 @@ export const DashboardRoutes: Routes = [
   {
     path: "class",
     component: ClassComponent
+  },
+  {
+    path: "reports",
+    component: ReportsComponent
   }
 ];

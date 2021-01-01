@@ -8,3 +8,5 @@ export const config = {
     guest: ['SA', 'Admin', 'Editor', 'User', 'Guest'] // Everyone has access
   }
 }
+
+// https://mss-laravel.herokuapp.com

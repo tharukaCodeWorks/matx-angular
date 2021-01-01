@@ -1,0 +1,110 @@
+<mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="Caffe Sales">
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Time Range</mat-label>
+            <mat-select formControlName="type"
+            name="type">
+                <mat-option value="week">
+                    Last Week
+                </mat-option>
+                <mat-option value="month">
+                    Last Month
+                </mat-option>
+                <mat-option value="six_month">
+                    Last Six Months
+                </mat-option>
+                <mat-option value="year">
+                    Last Year
+                </mat-option>
+                <mat-option value="five_year">
+                    Last Five Year
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="single"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Sales"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Caffe Expense">
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="single"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Expense"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Institute Sales">
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="single"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Sales"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Institute Expense">
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="single"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Expense"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Student Attendance">
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="single"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Attendance"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+</mat-tab-group>

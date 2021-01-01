@@ -8,6 +8,18 @@
         <div class="row">
             <div class="column">
                 <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Student Number</mat-label>
+                    <input
+                      matInput
+                      formControlName="id"
+                      type="text"
+                      name="id"
+                      placeholder="Student Number"
+                    />
+                  </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Inquerry</mat-label>
                     <input
                       matInput
@@ -34,7 +46,7 @@
                       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
                       <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
                     </ng-container>
-                
+                    attendable
                     <ng-container matColumnDef="inquiry">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> Inquiry </mat-header-cell>
                       <mat-cell *matCellDef="let row" data-label="progress"> {{row.inquiry}} </mat-cell>
@@ -46,7 +58,7 @@
                             <button mat-icon-button color="primary" aria-label="Edit" (click)="updateSelect(row)">
                                 <mat-icon>edit</mat-icon>   
                             </button>
-                            <button mat-icon-button color="warn" aria-label="Delete">
+                            <button mat-icon-button color="warn" (click)="deleteFee(row.id)" aria-label="Delete">
                                 <mat-icon>delete</mat-icon>   
                             </button>
                         </mat-cell>

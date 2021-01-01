@@ -84,7 +84,7 @@
                             <button mat-icon-button color="primary" aria-label="Edit" (click)="updateSelect(row)">
                                 <mat-icon>edit</mat-icon>   
                             </button>
-                            <button mat-icon-button color="warn" aria-label="Delete">
+                            <button mat-icon-button color="warn" (click)="deleteFee(row.id)" aria-label="Delete">
                                 <mat-icon>delete</mat-icon>   
                             </button>
                         </mat-cell>
