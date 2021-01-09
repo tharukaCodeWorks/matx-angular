@@ -1,1 +1,42 @@
 .chart-wrapper { display: flex; overflow: hidden; }
+
+#table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px;
+  }
+  
+  #table td, #table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #table tr:hover {background-color: #ddd;}
+  
+  #table tr:nth-child(1) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(170, 59, 96);
+    color: white;
+  }
+
+  #table tr:nth-child(2) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color:  rgb(170, 59, 96);
+  }
+
+  .row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    padding: 5px;
+}   

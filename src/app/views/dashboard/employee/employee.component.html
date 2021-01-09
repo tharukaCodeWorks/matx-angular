@@ -16,6 +16,8 @@
                       name="name"
                       placeholder="First Name"
                     />
+                    <mat-error *ngIf="checkError('name', 'required')">Name is required</mat-error>
+                    <mat-error *ngIf="checkError('name', 'minlength')">Name should be minimum three characters</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -23,10 +25,11 @@
                     <mat-label>Designation</mat-label>
                     <mat-select formControlName="designation"
                     name="designation">
-                        <mat-option value="1">
-                            Hello
+                        <mat-option *ngFor="let item of designation" [value]="item">
+                            {{item}}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="checkError('designation', 'required')">Please select a designation</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -34,10 +37,11 @@
                     <mat-label>Department</mat-label>
                     <mat-select formControlName="department"
                     name="department">
-                        <mat-option value="1">
-                            Hello
+                        <mat-option *ngFor="let item of departments" [value]="item">
+                            {{item}}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="checkError('department', 'required')">Please select a department</mat-error>
                   </mat-form-field>
             </div>
         </div>
@@ -53,6 +57,7 @@
                       name="address"
                       placeholder="Address"
                     />
+                    <mat-error *ngIf="checkError('address', 'required')">Please enter the address</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -65,6 +70,7 @@
                       name="contact"
                       placeholder="contact"
                     />
+                    <mat-error *ngIf="checkError('contact', 'required')">Please enter the contact number</mat-error>
                   </mat-form-field>
             </div>
         </div>

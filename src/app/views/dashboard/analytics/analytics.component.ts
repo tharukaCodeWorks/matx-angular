@@ -53,9 +53,9 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
       color: "primary"
     },
     {
-      icon: "shopping_cart",
-      title: "Orders to deliver",
-      amount: "305 Orders",
+      icon: "list",
+      title: "Number of inquiries",
+      amount: "305",
       color: "primary"
     }
   ];

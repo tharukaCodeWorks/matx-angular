@@ -12,10 +12,11 @@
                     <input
                       matInput
                       formControlName="id"
-                      type="text"
+                      type="number"
                       name="id"
                       placeholder="Employee/Student Number"
                     />
+                    <mat-error *ngIf="checkError('id', 'required')">Please Enter Employee/Student number</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -30,6 +31,7 @@
                             Employee
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="checkError('type', 'required')">Please Select User Type</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -44,6 +46,7 @@
                             Attended
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="checkError('id', 'required')">Please Enter Employee/Student number</mat-error>
                   </mat-form-field>
             </div>
         </div>
@@ -79,7 +82,7 @@
                         </mat-select>
                       </mat-form-field>
                 </div>
-                <div class="column" *ngIf="this.attend.get('type').value=='student'">
+                <!-- <div class="column" *ngIf="this.attend.get('type').value=='student'">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Class</mat-label>
                         <mat-select 
@@ -91,7 +94,7 @@
                             </mat-option>
                         </mat-select>
                       </mat-form-field>
-                </div>
+                </div> -->
                 <div class="column">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Attendance Status</mat-label>

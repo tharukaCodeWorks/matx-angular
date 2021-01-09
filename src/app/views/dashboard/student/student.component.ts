@@ -17,15 +17,16 @@ export class StudentComponent implements OnInit {
   editMode = false;
   editingObject:any = {};
   classes = [];
+  searchStudent = "";
 
   student = new FormGroup({
-    firstname: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
+    firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
     class: new FormControl('', Validators.required),
     birthday: new FormControl('', Validators.required),
     contact: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
-    nic: new FormControl('', Validators.required),
+    nic: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]),
   });
 
   snackConfig:MatSnackBarConfig = {
@@ -35,6 +36,8 @@ export class StudentComponent implements OnInit {
   dataColumns = [];
 
   dataSource:any = [];
+
+  filteredDataSource:any = [];
 
   constructor(private http:HttpClient, private snackBar: MatSnackBar,
     private viewContainerRef: ViewContainerRef) {}
@@ -49,6 +52,21 @@ export class StudentComponent implements OnInit {
     });
   }
 
+  serachStudFunctionality(data){
+    console.log(data.target.value);
+    if(data.target.value==""){
+      this.filteredDataSource =  this.dataSource;
+    }else{
+      this.filteredDataSource =  this.dataSource.filter(item=>
+        item.firstname.toUpperCase().includes(data.target.value.toUpperCase())||
+        item.lastname.toUpperCase().includes(data.target.value.toUpperCase())||
+        item.id==data.target.value||
+        item.class_room.name.toUpperCase().includes(data.target.value.toUpperCase())||
+        item.nic.toUpperCase().includes(data.target.value.toUpperCase())
+      );
+    }
+  }
+
   cancelEditMode(){
     this.editMode = false;
     this.student.reset();
@@ -57,6 +75,7 @@ export class StudentComponent implements OnInit {
   getAllStudents(){
     this.http.get(`${config.apiUrl}/students`).subscribe((res:any)=>{
       this.dataSource = res.data;
+      this.serachStudFunctionality({target:{value:""}});
     });
   }
 
@@ -107,6 +126,10 @@ export class StudentComponent implements OnInit {
 
   ngAfterViewInit() {
 
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.student.controls[controlName].hasError(errorName);
   }
 
 }

@@ -40,6 +40,8 @@
         class="signup4-form grey-100"
         (ngSubmit)="signin()"
       >
+      <div *ngIf="errorMsg!=''" style="background-color: rgb(250, 167, 167); color:rgb(158, 0, 0); padding: 10px; border-radius: 4px; margin-bottom: 20px;">{{errorMsg}}</div>
+
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Email</mat-label>
           <input

@@ -85,4 +85,8 @@ export class ClassComponent implements OnInit {
 
   }
 
+  public checkError = (controlName: string, errorName: string) => {
+    return this.class.controls[controlName].hasError(errorName);
+  }
+
 }

@@ -67,8 +67,14 @@ export class SigninComponent implements OnInit, AfterViewInit {
       this.loading = false;
       this.router.navigateByUrl(this.return);
     }, err => {
+      console.log(err.status);
       this.loading = false;
-      this.errorMsg = err.message;
+      if(err.status=='401'){
+        console.log("Inside the 401");
+        this.errorMsg = "Email or Password incorrect please check again!";
+      }else{
+        this.errorMsg = err.message;
+      }
     })
   }
 

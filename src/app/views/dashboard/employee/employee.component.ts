@@ -14,9 +14,35 @@ export class EmployeeComponent implements OnInit {
   selectedIndex = 1;
   editMode = false;
   editingObject:any = {};
+  designation = [
+    "Manager",
+    "Assistant Manager",
+    "Marketing Manager",
+    "Accounting Manager",
+    "Marketing Associate",
+    "HR Associate",
+    "Administration Supervisor",
+    "Accounting Officer",
+    "Cafeteria Manager",
+    "Cafeteria Worker",
+    "Front Office Clerk",
+    "Head Of Academic",
+    "Course Coordinator",
+    "Lecturer"
+  ];
+
+  departments = [
+    "Top Management",
+    "Administration Department",
+    "Marketing Department",
+    "Accounting Department",
+    "HR Department",
+    "Cafeteria Department",
+    "Academic Department"
+  ]
 
   employee = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     address: new FormControl('', Validators.required),
     contact: new FormControl('', Validators.required),
     designation: new FormControl('', Validators.required),
@@ -88,6 +114,10 @@ export class EmployeeComponent implements OnInit {
 
   ngAfterViewInit() {
 
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.employee.controls[controlName].hasError(errorName);
   }
 
 }

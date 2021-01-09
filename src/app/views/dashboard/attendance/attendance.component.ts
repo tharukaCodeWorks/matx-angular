@@ -14,6 +14,7 @@ export class AttendanceComponent implements OnInit {
   selectedIndex = 1;
   editMode = false;
   editingObject:any = {};
+  classes: any = [];
 
   attend = new FormGroup({
     id: new FormControl('', Validators.required),
@@ -24,7 +25,6 @@ export class AttendanceComponent implements OnInit {
   filter = new FormGroup({
     type: new FormControl('all', Validators.required),
     status: new FormControl('0', Validators.required),
-    class: new FormControl('', Validators.required),
     range: new FormControl('today', Validators.required)
   });
 
@@ -54,7 +54,10 @@ export class AttendanceComponent implements OnInit {
 
     this.http.post(`${config.apiUrl}/attendance`, form).subscribe(res=>{
       this.getAllAttendance();
+      this.attend.reset();
       this.snackBar.open("Attendance recorded", "Ok", {duration:2000});
+    },error=>{
+      this.snackBar.open("Sorry, I can't find any user assosiated with the user number!", "Ok", {duration:2000});
     });
   }
 
@@ -64,6 +67,16 @@ export class AttendanceComponent implements OnInit {
 
   filterSubmit(){
 
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.attend.controls[controlName].hasError(errorName);
+  }
+
+  getAllClasses(){
+    this.http.get(`${config.apiUrl}/classes`).subscribe((res:any)=>{
+      this.classes = res.data;
+    });
   }
 
 }

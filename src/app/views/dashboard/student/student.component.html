@@ -16,6 +16,8 @@
                       name="firstname"
                       placeholder="First Name"
                     />
+                    <mat-error *ngIf="checkError('firstname', 'required')">Plaease Enter First Name</mat-error>
+                    <mat-error *ngIf="checkError('firstname', 'minlength')">First Name should be more than three characters</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -28,6 +30,8 @@
                       name="lastname"
                       placeholder="Last Name"
                     />
+                    <mat-error *ngIf="checkError('lastname', 'required')">Plaease Enter Last Name</mat-error>
+                    <mat-error *ngIf="checkError('firstname', 'minlength')">Last Name should be more than three characters</mat-error>
                   </mat-form-field>
             </div>
         </div>
@@ -49,6 +53,7 @@
                       name="class"
                       placeholder="Class"
                     /> -->
+                    <mat-error *ngIf="checkError('class', 'required')">Plaease Select Class</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -61,6 +66,7 @@
                       name="birthday"
                       placeholder="birthday"
                     />
+                    <mat-error *ngIf="checkError('birthday', 'required')">Plaease Select birthday</mat-error>
                   </mat-form-field>
             </div>
         </div>
@@ -76,6 +82,7 @@
                       name="contact"
                       placeholder="contact"
                     />
+                    <mat-error *ngIf="checkError('contact', 'required')">Plaease Enter Contact</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -88,6 +95,7 @@
                       name="address"
                       placeholder="Address"
                     />
+                    <mat-error *ngIf="checkError('address', 'required')">Plaease Enter Address</mat-error>
                 </mat-form-field>
             </div>
             <div class="column">
@@ -100,6 +108,9 @@
                       name="nic"
                       placeholder="NIC"
                     />
+                    <mat-error *ngIf="checkError('nic', 'required')">Plaease Enter NIC</mat-error>
+                    <mat-error *ngIf="checkError('nic', 'minlength')">Plaease Enter Valid NIC</mat-error>
+                    <mat-error *ngIf="checkError('nic', 'maxlength')">Plaease Enter Valid NIC</mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -110,9 +121,21 @@
 
 
     <mat-tab label="Student List">
+      <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Search Student</mat-label>
+          <input
+            matInput
+            (keyup)="serachStudFunctionality($event)"
+            type="text"
+            placeholder="Search Student by Name, NIC and Student Number"
+          />
+        
+        </mat-form-field>
+      </div>
         <div class="ml-05 mr-05 mt-05 pb-1">
             <div class="mat-elevation-z8">
-                <mat-table [dataSource]="dataSource" matSort >
+                <mat-table [dataSource]="filteredDataSource" matSort >
           
                     <ng-container matColumnDef="id">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>

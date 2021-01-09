@@ -73,6 +73,7 @@ export class CaffeComponent implements OnInit {
 
   delete(id){
     this.http.delete(`${config.apiUrl}/cafe/${id}`).subscribe(res=>{
+      this.snackBar.open("Deleted successfully!", "Ok", {duration:2000});
       this.getAll();
     })
   }
@@ -80,6 +81,10 @@ export class CaffeComponent implements OnInit {
   cancelEditMode(){
     this.editMode = false;
     this.caffe.reset();
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.caffe.controls[controlName].hasError(errorName);
   }
 
 }

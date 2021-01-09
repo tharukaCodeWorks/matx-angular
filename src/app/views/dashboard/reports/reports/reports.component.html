@@ -1,110 +1,1113 @@
 <mat-tab-group [(selectedIndex)]="selectedIndex">
     <mat-tab label="Caffe Sales">
-        <br>
-        <mat-form-field appearance="outline">
-            <mat-label>Time Range</mat-label>
-            <mat-select formControlName="type"
-            name="type">
-                <mat-option value="week">
-                    Last Week
-                </mat-option>
-                <mat-option value="month">
-                    Last Month
-                </mat-option>
-                <mat-option value="six_month">
-                    Last Six Months
-                </mat-option>
-                <mat-option value="year">
-                    Last Year
-                </mat-option>
-                <mat-option value="five_year">
-                    Last Five Year
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <br>
-        <div class="chart-wrapper">
-            <ngx-charts-bar-vertical
-                [results]="single"
-                gradient="false"
-                xAxis="true"
-                yAxis="true"
-                legend="true"
-                showXAxisLabel="true"
-                showYAxisLabel="true"
-                xAxisLabel="Month"
-                yAxisLabel="Sales"
-               >
-            </ngx-charts-bar-vertical>
-        </div>
+
+        <mat-tab-group>
+            <mat-tab label="Chart">
+                <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Time Range</mat-label>
+                        <mat-select>
+                            <mat-option value="week">
+                                Last Week
+                            </mat-option>
+                            <mat-option value="month">
+                                Last Month
+                            </mat-option>
+                            <mat-option value="six_month">
+                                Last Six Months
+                            </mat-option>
+                            <mat-option value="year">
+                                Last Year
+                            </mat-option>
+                            <mat-option value="five_year">
+                                Last Five Year
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="chart-wrapper">
+                    <ngx-charts-bar-vertical
+                        [results]="caffeIncome"
+                        gradient="false"
+                        xAxis="true"
+                        yAxis="true"
+                        legend="true"
+                        showXAxisLabel="true"
+                        showYAxisLabel="true"
+                        xAxisLabel="Month"
+                        yAxisLabel="Sales"
+                       >
+                    </ngx-charts-bar-vertical>
+                </div>
+            </mat-tab>
+            <mat-tab label="Report">
+                <div class="row">
+                    <div class="column">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>Time Range</mat-label>
+                                <mat-select [(value)]="timeRange">
+                                    <mat-option value="week">
+                                        Last Week
+                                    </mat-option>
+                                    <mat-option value="month">
+                                        Last Month
+                                    </mat-option>
+                                    <mat-option value="six_month">
+                                        Last Six Months
+                                    </mat-option>
+                                    <mat-option value="year">
+                                        Last Year
+                                    </mat-option>
+                                    <mat-option value="five_year">
+                                        Last Five Year
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                    <div class="column">
+                            <mat-form-field  class="full-width" appearance="outline">
+                                <mat-label>Month</mat-label>
+                                <mat-select [(value)]="selectedMonth">
+                                    <mat-option value="jan">
+                                        January
+                                    </mat-option>
+                                    <mat-option value="feb">
+                                        February
+                                    </mat-option>
+                                    <mat-option value="mar">
+                                        March
+                                    </mat-option>
+                                    <mat-option value="apr">
+                                        April
+                                    </mat-option>
+                                    <mat-option value="may">
+                                        May
+                                    </mat-option>
+                                    <mat-option value="jun">
+                                        June
+                                    </mat-option>
+                                    <mat-option value="jul">
+                                        July
+                                    </mat-option>
+                                    <mat-option value="aug">
+                                        Augest
+                                    </mat-option>
+                                    <mat-option value="sep">
+                                        September
+                                    </mat-option>
+                                    <mat-option value="oct">
+                                        Octomber
+                                    </mat-option>
+                                    <mat-option value="nov">
+                                        November
+                                    </mat-option>
+                                    <mat-option value="dec">
+                                        December
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                </div>
+                
+                <table *ngIf="selectedMonth=='jan'" id="table">
+                    <tr>
+                        <th colspan="3" >January</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Breakfast packs sold</td>
+                        <td>135000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lunch Packs sold</td>
+                        <td>112654</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cold Beverages</td>
+                        <td>60000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Hot Beverages</td>
+                        <td>35000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bun Products Sold</td>
+                        <td>95000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">437654</td>
+                    </tr>
+                </table>
+    
+                <table *ngIf="selectedMonth=='feb'" id="table">
+                    <tr>
+                        <th colspan="3" >February</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>Breakfast packs sold</td>
+                        <td>145000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lunch Packs sold</td>
+                        <td>149000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cold Beverages</td>
+                        <td>71000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Hot Beverages</td>
+                        <td>42345</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bun Products Sold</td>
+                        <td>105000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">512345</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='mar'" id="table">
+                    <tr>
+                        <th colspan="3" >March</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>Breakfast packs sold</td>
+                        <td>138466</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lunch Packs sold</td>
+                        <td>128000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cold Beverages</td>
+                        <td>67068</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Hot Beverages</td>
+                        <td>42345</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bun Products Sold</td>
+                        <td>81000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">456879</td>
+                    </tr>
+                </table>
+
+            </mat-tab>
+        </mat-tab-group>
     </mat-tab>
 
     <mat-tab label="Caffe Expense">
-        <div class="chart-wrapper">
-            <ngx-charts-bar-vertical
-                [results]="single"
-                gradient="false"
-                xAxis="true"
-                yAxis="true"
-                legend="true"
-                showXAxisLabel="true"
-                showYAxisLabel="true"
-                xAxisLabel="Month"
-                yAxisLabel="Expense"
-               >
-            </ngx-charts-bar-vertical>
-        </div>
+
+        <mat-tab-group>
+            <mat-tab label="Chart">
+                <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Time Range</mat-label>
+                        <mat-select>
+                            <mat-option value="week">
+                                Last Week
+                            </mat-option>
+                            <mat-option value="month">
+                                Last Month
+                            </mat-option>
+                            <mat-option value="six_month">
+                                Last Six Months
+                            </mat-option>
+                            <mat-option value="year">
+                                Last Year
+                            </mat-option>
+                            <mat-option value="five_year">
+                                Last Five Year
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="chart-wrapper">
+                    <ngx-charts-bar-vertical
+                        [results]="caffeExpense"
+                        gradient="false"
+                        xAxis="true"
+                        yAxis="true"
+                        legend="true"
+                        showXAxisLabel="true"
+                        showYAxisLabel="true"
+                        xAxisLabel="Month"
+                        yAxisLabel="Expense"
+                       >
+                    </ngx-charts-bar-vertical>
+                </div>
+            </mat-tab>
+            <mat-tab label="Report">
+                <div class="row">
+                    <div class="column">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>Time Range</mat-label>
+                                <mat-select [(value)]="timeRange">
+                                    <mat-option value="week">
+                                        Last Week
+                                    </mat-option>
+                                    <mat-option value="month">
+                                        Last Month
+                                    </mat-option>
+                                    <mat-option value="six_month">
+                                        Last Six Months
+                                    </mat-option>
+                                    <mat-option value="year">
+                                        Last Year
+                                    </mat-option>
+                                    <mat-option value="five_year">
+                                        Last Five Year
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                    <div class="column">
+                            <mat-form-field  class="full-width" appearance="outline">
+                                <mat-label>Month</mat-label>
+                                <mat-select [(value)]="selectedMonth">
+                                    <mat-option value="jan">
+                                        January
+                                    </mat-option>
+                                    <mat-option value="feb">
+                                        February
+                                    </mat-option>
+                                    <mat-option value="mar">
+                                        March
+                                    </mat-option>
+                                    <mat-option value="apr">
+                                        April
+                                    </mat-option>
+                                    <mat-option value="may">
+                                        May
+                                    </mat-option>
+                                    <mat-option value="jun">
+                                        June
+                                    </mat-option>
+                                    <mat-option value="jul">
+                                        July
+                                    </mat-option>
+                                    <mat-option value="aug">
+                                        Augest
+                                    </mat-option>
+                                    <mat-option value="sep">
+                                        September
+                                    </mat-option>
+                                    <mat-option value="oct">
+                                        Octomber
+                                    </mat-option>
+                                    <mat-option value="nov">
+                                        November
+                                    </mat-option>
+                                    <mat-option value="dec">
+                                        December
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                </div>
+                
+                <table *ngIf="selectedMonth=='jan'" id="table">
+                    <tr>
+                        <th colspan="3" >January</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Breakfast packs purchased</td>
+                        <td>85000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lunch Packs purchased</td>
+                        <td>75000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cold Beverages cost</td>
+                        <td>25476</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Hot Beverages cost</td>
+                        <td>18000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bun Products purchased</td>
+                        <td>50000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">253476</td>
+                    </tr>
+                </table>
+    
+                <table *ngIf="selectedMonth=='feb'" id="table">
+                    <tr>
+                        <th colspan="3" >February</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Breakfast packs purchased</td>
+                        <td>95000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lunch Packs purchased</td>
+                        <td>94000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cold Beverages cost</td>
+                        <td>36000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Hot Beverages cost</td>
+                        <td>28000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bun Products purchased</td>
+                        <td>62000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">315000</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='mar'" id="table">
+                    <tr>
+                        <th colspan="3" >March</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Breakfast packs purchased</td>
+                        <td>75000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lunch Packs purchased</td>
+                        <td>65000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cold Beverages cost</td>
+                        <td>27000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Hot Beverages cost</td>
+                        <td>26000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bun Products purchased</td>
+                        <td>33000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">225000</td>
+                    </tr>
+                </table>
+            </mat-tab>
+        </mat-tab-group>
     </mat-tab>
 
     <mat-tab label="Institute Sales">
-        <div class="chart-wrapper">
-            <ngx-charts-bar-vertical
-                [results]="single"
-                gradient="false"
-                xAxis="true"
-                yAxis="true"
-                legend="true"
-                showXAxisLabel="true"
-                showYAxisLabel="true"
-                xAxisLabel="Month"
-                yAxisLabel="Sales"
-               >
-            </ngx-charts-bar-vertical>
-        </div>
+
+        <mat-tab-group>
+            <mat-tab label="Chart">
+                <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Time Range</mat-label>
+                        <mat-select>
+                            <mat-option value="week">
+                                Last Week
+                            </mat-option>
+                            <mat-option value="month">
+                                Last Month
+                            </mat-option>
+                            <mat-option value="six_month">
+                                Last Six Months
+                            </mat-option>
+                            <mat-option value="year">
+                                Last Year
+                            </mat-option>
+                            <mat-option value="five_year">
+                                Last Five Year
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="chart-wrapper">
+                    <ngx-charts-bar-vertical
+                        [results]="monthlyIncome"
+                        gradient="false"
+                        xAxis="true"
+                        yAxis="true"
+                        legend="true"
+                        showXAxisLabel="true"
+                        showYAxisLabel="true"
+                        xAxisLabel="Month"
+                        yAxisLabel="Sales"
+                       >
+                    </ngx-charts-bar-vertical>
+                </div>
+            </mat-tab>
+            <mat-tab label="Report">
+                <div class="row">
+                    <div class="column">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>Time Range</mat-label>
+                                <mat-select [(value)]="timeRange">
+                                    <mat-option value="week">
+                                        Last Week
+                                    </mat-option>
+                                    <mat-option value="month">
+                                        Last Month
+                                    </mat-option>
+                                    <mat-option value="six_month">
+                                        Last Six Months
+                                    </mat-option>
+                                    <mat-option value="year">
+                                        Last Year
+                                    </mat-option>
+                                    <mat-option value="five_year">
+                                        Last Five Year
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                    <div class="column">
+                            <mat-form-field  class="full-width" appearance="outline">
+                                <mat-label>Month</mat-label>
+                                <mat-select [(value)]="selectedMonth">
+                                    <mat-option value="jan">
+                                        January
+                                    </mat-option>
+                                    <mat-option value="feb">
+                                        February
+                                    </mat-option>
+                                    <mat-option value="mar">
+                                        March
+                                    </mat-option>
+                                    <mat-option value="apr">
+                                        April
+                                    </mat-option>
+                                    <mat-option value="may">
+                                        May
+                                    </mat-option>
+                                    <mat-option value="jun">
+                                        June
+                                    </mat-option>
+                                    <mat-option value="jul">
+                                        July
+                                    </mat-option>
+                                    <mat-option value="aug">
+                                        Augest
+                                    </mat-option>
+                                    <mat-option value="sep">
+                                        September
+                                    </mat-option>
+                                    <mat-option value="oct">
+                                        Octomber
+                                    </mat-option>
+                                    <mat-option value="nov">
+                                        November
+                                    </mat-option>
+                                    <mat-option value="dec">
+                                        December
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                </div>
+                
+                <table *ngIf="selectedMonth=='jan'" id="table">
+                    <tr>
+                        <th colspan="3" >January</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Fees received</td>
+                        <td>904346</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Cafeteria Income</td>
+                        <td>437654</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">1342000</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='feb'" id="table">
+                    <tr>
+                        <th colspan="3" >February</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Fees received</td>
+                        <td>767655</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Cafeteria Income</td>
+                        <td>512345</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">1280000</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='mar'" id="table">
+                    <tr>
+                        <th colspan="3" >March</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Fees received</td>
+                        <td>1043121</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Cafeteria Income</td>
+                        <td>456879</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">1500000</td>
+                    </tr>
+                </table>
+                
+            </mat-tab>
+        </mat-tab-group>
     </mat-tab>
 
     <mat-tab label="Institute Expense">
-        <div class="chart-wrapper">
-            <ngx-charts-bar-vertical
-                [results]="single"
-                gradient="false"
-                xAxis="true"
-                yAxis="true"
-                legend="true"
-                showXAxisLabel="true"
-                showYAxisLabel="true"
-                xAxisLabel="Month"
-                yAxisLabel="Expense"
-               >
-            </ngx-charts-bar-vertical>
-        </div>
+
+        <mat-tab-group>
+            <mat-tab label="Chart">
+                <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Time Range</mat-label>
+                        <mat-select>
+                            <mat-option value="week">
+                                Last Week
+                            </mat-option>
+                            <mat-option value="month">
+                                Last Month
+                            </mat-option>
+                            <mat-option value="six_month">
+                                Last Six Months
+                            </mat-option>
+                            <mat-option value="year">
+                                Last Year
+                            </mat-option>
+                            <mat-option value="five_year">
+                                Last Five Year
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="chart-wrapper">
+                    <ngx-charts-bar-vertical
+                        [results]="monthlyExpenses"
+                        gradient="false"
+                        xAxis="true"
+                        yAxis="true"
+                        legend="true"
+                        showXAxisLabel="true"
+                        showYAxisLabel="true"
+                        xAxisLabel="Month"
+                        yAxisLabel="Expense"
+                    >
+                    </ngx-charts-bar-vertical>
+                </div>
+            </mat-tab>
+            <mat-tab label="Report">
+                <div class="row">
+                    <div class="column">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>Time Range</mat-label>
+                                <mat-select [(value)]="timeRange">
+                                    <mat-option value="week">
+                                        Last Week
+                                    </mat-option>
+                                    <mat-option value="month">
+                                        Last Month
+                                    </mat-option>
+                                    <mat-option value="six_month">
+                                        Last Six Months
+                                    </mat-option>
+                                    <mat-option value="year">
+                                        Last Year
+                                    </mat-option>
+                                    <mat-option value="five_year">
+                                        Last Five Year
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                    <div class="column">
+                            <mat-form-field  class="full-width" appearance="outline">
+                                <mat-label>Month</mat-label>
+                                <mat-select [(value)]="selectedMonth">
+                                    <mat-option value="jan">
+                                        January
+                                    </mat-option>
+                                    <mat-option value="feb">
+                                        February
+                                    </mat-option>
+                                    <mat-option value="mar">
+                                        March
+                                    </mat-option>
+                                    <mat-option value="apr">
+                                        April
+                                    </mat-option>
+                                    <mat-option value="may">
+                                        May
+                                    </mat-option>
+                                    <mat-option value="jun">
+                                        June
+                                    </mat-option>
+                                    <mat-option value="jul">
+                                        July
+                                    </mat-option>
+                                    <mat-option value="aug">
+                                        Augest
+                                    </mat-option>
+                                    <mat-option value="sep">
+                                        September
+                                    </mat-option>
+                                    <mat-option value="oct">
+                                        Octomber
+                                    </mat-option>
+                                    <mat-option value="nov">
+                                        November
+                                    </mat-option>
+                                    <mat-option value="dec">
+                                        December
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                </div>
+                
+                <table *ngIf="selectedMonth=='jan'" id="table">
+                    <tr>
+                        <th colspan="3" >January</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Salaries</td>
+                        <td>550000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Utility Bills</td>
+                        <td>125000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Stationary</td>
+                        <td>32000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Petty costs</td>
+                        <td>18000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">725000</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='feb'" id="table">
+                    <tr>
+                        <th colspan="3" >February</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Salaries</td>
+                        <td>550000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Utility Bills</td>
+                        <td>65000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Stationary</td>
+                        <td>25000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Petty costs</td>
+                        <td>15000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">655000</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='mar'" id="table">
+                    <tr>
+                        <th colspan="3" >March</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>Salaries</td>
+                        <td>600000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Utility Bills</td>
+                        <td>110000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Stationary</td>
+                        <td>45000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Petty costs</td>
+                        <td>40000</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">795000</td>
+                    </tr>
+                </table>
+
+            </mat-tab>
+        </mat-tab-group>
+
     </mat-tab>
 
-    <mat-tab label="Student Attendance">
-        <div class="chart-wrapper">
-            <ngx-charts-bar-vertical
-                [results]="single"
-                gradient="false"
-                xAxis="true"
-                yAxis="true"
-                legend="true"
-                showXAxisLabel="true"
-                showYAxisLabel="true"
-                xAxisLabel="Month"
-                yAxisLabel="Attendance"
-               >
-            </ngx-charts-bar-vertical>
-        </div>
+    <mat-tab label="Student Registration">
+
+        <mat-tab-group>
+            <mat-tab label="Chart">
+                <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Time Range</mat-label>
+                        <mat-select>
+                            <mat-option value="week">
+                                Last Week
+                            </mat-option>
+                            <mat-option value="month">
+                                Last Month
+                            </mat-option>
+                            <mat-option value="six_month">
+                                Last Six Months
+                            </mat-option>
+                            <mat-option value="year">
+                                Last Year
+                            </mat-option>
+                            <mat-option value="five_year">
+                                Last Five Year
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="chart-wrapper">
+                    <ngx-charts-bar-vertical
+                        [results]="single"
+                        gradient="false"
+                        xAxis="true"
+                        yAxis="true"
+                        legend="true"
+                        showXAxisLabel="true"
+                        showYAxisLabel="true"
+                        xAxisLabel="Month"
+                        yAxisLabel="Attendance"
+                       >
+                    </ngx-charts-bar-vertical>
+                </div>
+            </mat-tab>
+            <mat-tab label="Report">
+                <div class="row">
+                    <div class="column">
+                            <mat-form-field class="full-width" appearance="outline">
+                                <mat-label>Time Range</mat-label>
+                                <mat-select [(value)]="timeRange">
+                                    <mat-option value="week">
+                                        Last Week
+                                    </mat-option>
+                                    <mat-option value="month">
+                                        Last Month
+                                    </mat-option>
+                                    <mat-option value="six_month">
+                                        Last Six Months
+                                    </mat-option>
+                                    <mat-option value="year">
+                                        Last Year
+                                    </mat-option>
+                                    <mat-option value="five_year">
+                                        Last Five Year
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                    <div class="column">
+                            <mat-form-field  class="full-width" appearance="outline">
+                                <mat-label>Month</mat-label>
+                                <mat-select [(value)]="selectedMonth">
+                                    <mat-option value="jan">
+                                        January
+                                    </mat-option>
+                                    <mat-option value="feb">
+                                        February
+                                    </mat-option>
+                                    <mat-option value="mar">
+                                        March
+                                    </mat-option>
+                                    <mat-option value="apr">
+                                        April
+                                    </mat-option>
+                                    <mat-option value="may">
+                                        May
+                                    </mat-option>
+                                    <mat-option value="jun">
+                                        June
+                                    </mat-option>
+                                    <mat-option value="jul">
+                                        July
+                                    </mat-option>
+                                    <mat-option value="aug">
+                                        Augest
+                                    </mat-option>
+                                    <mat-option value="sep">
+                                        September
+                                    </mat-option>
+                                    <mat-option value="oct">
+                                        Octomber
+                                    </mat-option>
+                                    <mat-option value="nov">
+                                        November
+                                    </mat-option>
+                                    <mat-option value="dec">
+                                        December
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                </div>
+                
+                <table *ngIf="selectedMonth=='jan'" id="table">
+                    <tr>
+                        <th colspan="3" >January</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>1st week </td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2nd week</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>3rd week</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>4th week</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">34</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='feb'" id="table">
+                    <tr>
+                        <th colspan="3" >February</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>1st week </td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2nd week</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>3rd week</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>4th week</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">56</td>
+                    </tr>
+                </table>
+
+                <table *ngIf="selectedMonth=='mar'" id="table">
+                    <tr>
+                        <th colspan="3" >March</th>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+	
+                    <tr>
+                        <td>1</td>
+                        <td>1st week </td>
+                        <td>22</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2nd week</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>3rd week</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>4th week</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td colspan="2">67</td>
+                    </tr>
+                </table>
+                
+            </mat-tab>
+        </mat-tab-group>
     </mat-tab>
 
 </mat-tab-group>

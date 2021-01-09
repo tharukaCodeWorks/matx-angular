@@ -1,5 +1,5 @@
 export const config = {
-  apiUrl: 'http://127.0.0.1:8000/api',
+  apiUrl: 'https://mss-laravel.herokuapp.com/api',
   authRoles: {
     sa: ['SA'], // Only Super Admin has access
     admin: ['SA', 'Admin'], // Only SA & Admin has access

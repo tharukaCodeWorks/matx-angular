@@ -61,6 +61,13 @@ export class NavigationService {
       state: "dashboard/fees"
     },
     {
+      name: "Expense",
+      type: "link",
+      tooltip: "Expense",
+      icon: "money",
+      state: "dashboard/expense"
+    },
+    {
       name: "Cafe",
       type: "link",
       icon: "coffee",

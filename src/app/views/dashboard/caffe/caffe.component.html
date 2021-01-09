@@ -7,7 +7,7 @@
       >
         <div class="row">
             <div class="column">
-                <mat-form-field class="full-width" appearance="outline">
+                <!-- <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Item</mat-label>
                     <mat-select formControlName="item"
                     name="item">
@@ -15,6 +15,19 @@
                             Milk
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="checkError('item', 'required')">Please select an item</mat-error>
+                  </mat-form-field> -->
+
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Item</mat-label>
+                    <input
+                      matInput
+                      formControlName="item"
+                      type="text"
+                      name="item"
+                      placeholder="Item"
+                    />
+                    <mat-error *ngIf="checkError('item', 'required')">Item is required</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -27,6 +40,7 @@
                       name="cost_price"
                       placeholder="Cost Price"
                     />
+                    <mat-error *ngIf="checkError('cost_price', 'required')">Cost Price is required</mat-error>
                   </mat-form-field>
             </div>
         </div>
@@ -37,10 +51,11 @@
                     <input
                       matInput
                       formControlName="sale_price"
-                      type="text"
+                      type="number"
                       name="sale_price"
                       placeholder="Sale Price"
                     />
+                    <mat-error *ngIf="checkError('sale_price', 'required')">Sale Price is required</mat-error>
                 </mat-form-field>
             </div>
             <div class="column">
@@ -53,6 +68,7 @@
                       name="date"
                       placeholder="Date"
                     />
+                    <mat-error *ngIf="checkError('date', 'required')">Date is required</mat-error>
                 </mat-form-field>
             </div>
         </div>

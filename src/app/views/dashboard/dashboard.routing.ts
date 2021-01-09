@@ -5,6 +5,7 @@ import { AttendanceComponent } from "./attendance/attendance.component";
 import { CaffeComponent } from "./caffe/caffe.component";
 import { ClassComponent } from "./class/class.component";
 import { EmployeeComponent } from "./employee/employee.component";
+import { ExpensesComponent } from "./expenses/expenses.component";
 import { FeesComponent } from "./fees/fees.component";
 import { InquiryComponent } from "./inquiry/inquiry.component";
 import { ReportsComponent } from "./reports/reports/reports.component";
@@ -50,5 +51,9 @@ export const DashboardRoutes: Routes = [
   {
     path: "reports",
     component: ReportsComponent
+  },
+  {
+    path: "expense",
+    component: ExpensesComponent
   }
 ];

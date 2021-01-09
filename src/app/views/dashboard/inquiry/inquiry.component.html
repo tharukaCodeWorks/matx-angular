@@ -12,10 +12,11 @@
                     <input
                       matInput
                       formControlName="id"
-                      type="text"
+                      type="number"
                       name="id"
                       placeholder="Student Number"
                     />
+                    <mat-error *ngIf="checkError('id', 'required')">Plaease enter student number</mat-error>
                   </mat-form-field>
             </div>
             <div class="column">
@@ -28,7 +29,23 @@
                       name="inquiry"
                       placeholder="Inquiry"
                     />
+                    <mat-error *ngIf="checkError('inquiry', 'required')">Plaease enter inquiry</mat-error>
                   </mat-form-field>
+            </div>
+            <div class="column">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Resolved Status</mat-label>
+                <mat-select formControlName="status"
+                name="status">
+                    <mat-option value="true">
+                      Resolved
+                    </mat-option>
+                    <mat-option value="false">
+                      Not Resolved
+                  </mat-option>
+                </mat-select>
+             
+              </mat-form-field>
             </div>
         </div>
         <button mat-raised-button color="primary">{{editMode?'Save':'Create'}}</button>
@@ -46,10 +63,25 @@
                       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
                       <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
                     </ng-container>
-                    attendable
+
+                    <ng-container matColumnDef="student_id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Student Id </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.student_id}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="student_name">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Student Name </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.student.firstname}} {{row.student.lastname}} </mat-cell>
+                    </ng-container>
+                    
                     <ng-container matColumnDef="inquiry">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> Inquiry </mat-header-cell>
                       <mat-cell *matCellDef="let row" data-label="progress"> {{row.inquiry}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.status?'Resolved':'Not Resolved'}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="action">

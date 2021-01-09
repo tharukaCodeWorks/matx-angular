@@ -16,7 +16,8 @@ export class InquiryComponent implements OnInit {
   editingObject = {};
   class = new FormGroup({
     id: new FormControl('', Validators.required),
-    inquiry: new FormControl('', Validators.required)
+    inquiry: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required)
   })
 
   dataColumns = [];
@@ -30,7 +31,8 @@ export class InquiryComponent implements OnInit {
     this.editMode = true;
     this.editingObject = data;
     this.class.patchValue({
-      ...data
+      ...data,
+      id: data.student.id
     });
   }
 
@@ -54,7 +56,8 @@ export class InquiryComponent implements OnInit {
   newClass(){
     let data = {
       id: this.class.get("id").value,
-      inquiry: this.class.get("inquiry").value
+      inquiry: this.class.get("inquiry").value,
+      status: this.class.get("status").value=="true"?true:false
     };
 
     this.http.post(`${config.apiUrl}/inquires`, data).subscribe(res=>{
@@ -65,12 +68,16 @@ export class InquiryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "inquiry", "action"];
+    this.dataColumns = ["id", "student_id", "student_name", "status","inquiry", "action"];
     this.getAllClasses();
   }
 
   ngAfterViewInit() {
 
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.class.controls[controlName].hasError(errorName);
   }
 
 }

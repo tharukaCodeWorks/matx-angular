@@ -16,6 +16,7 @@
                       name="name"
                       placeholder="Class Name"
                     />
+                    <mat-error *ngIf="checkError('name', 'required')">Please enter class name</mat-error>
                   </mat-form-field>
             </div>
         </div>

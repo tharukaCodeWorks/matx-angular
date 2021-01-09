@@ -1,0 +1,118 @@
+<mat-tab-group [(selectedIndex)]="selectedIndex">
+    <mat-tab label="New">
+        <form
+        class="signup4-form"
+        [formGroup]="employee"
+        (ngSubmit)="newEmployee()"
+      >
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Student Id</mat-label>
+                    <input
+                      matInput
+                      formControlName="stud_id"
+                      type="number"
+                      name="stud_id"
+                      placeholder="Student Id"
+                    />
+                    <mat-error *ngIf="checkError('stud_id', 'required')">This field is required</mat-error>
+                  </mat-form-field>
+            </div>
+
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Amount</mat-label>
+                    <input
+                      matInput
+                      formControlName="amount"
+                      type="number"
+                      name="amount"
+                      placeholder="Amount"
+                    />
+                    <mat-error *ngIf="checkError('amount', 'required')">This field is required</mat-error>
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Date</mat-label>
+                    <input
+                      matInput
+                      formControlName="date"
+                      type="date"
+                      name="date"
+                      placeholder="date"
+                    />
+                    <mat-error *ngIf="checkError('date', 'required')">This field is required</mat-error>
+                  </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Detail</mat-label>
+                    <input
+                      matInput
+                      formControlName="detail"
+                      type="text"
+                      name="detail"
+                      placeholder="detail"
+                    />
+                    <mat-error *ngIf="checkError('detail', 'required')">This field is required</mat-error>
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <button mat-raised-button color="primary">{{editMode?'Save':'Create'}}</button>
+        <button *ngIf="editMode" style="margin-left: 10px;" (click)="cancelEditMode()" mat-raised-button color="warn">Cancel</button>
+      </form>
+    </mat-tab>
+
+
+    <mat-tab label="Expenses List">
+        <div class="ml-05 mr-05 mt-05 pb-1">
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort >
+          
+                    <!-- <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
+                    </ng-container> -->
+                    <ng-container matColumnDef="amount">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+                      <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.amount}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="detail">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Detail </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.detail}} </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="date">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="name"> {{formatDate(row.date)}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> 
+                            <button mat-icon-button color="primary" aria-label="Edit" (click)="updateSelect(row)">
+                                <mat-icon>edit</mat-icon>   
+                            </button>
+                            <button mat-icon-button color="warn" (click)="deleteEmployee(row.id)" aria-label="Delete">
+                                <mat-icon>delete</mat-icon>   
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                    
+                    <mat-header-row *matHeaderRowDef="dataColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: dataColumns;">
+                    </mat-row>
+                </mat-table>
+                
+            </div>
+          </div>
+          
+    </mat-tab>
+  </mat-tab-group>

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,18 +15,21 @@ export class FeesComponent implements OnInit {
   selectedIndex = 1;
   editMode = false;
   editingObject:any = {};
+  duePayment = 'all';
 
   fee = new FormGroup({
     stud_id: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
-    amount: new FormControl('', Validators.required)
+    amount: new FormControl('', Validators.required),
+    total_paid: new FormControl('', Validators.required),
+    installments: new FormControl('', Validators.required)
   });
 
   dataColumns = [];
 
   dataSource:any = [];
 
-  constructor(private http:HttpClient, private snackBar:MatSnackBar) {}
+  constructor(private http:HttpClient, private snackBar:MatSnackBar, public datepipe: DatePipe) {}
 
   updateSelect(data){
     this.selectedIndex = 0;
@@ -36,10 +40,25 @@ export class FeesComponent implements OnInit {
     });
   }
 
+  filterData(){
+    if(this.duePayment=="all"){
+      return this.dataSource;
+    }else {
+      return this.dataSource.filter(item=>{
+        return `${item.is_payment_due}`==this.duePayment;
+      });
+    }
+    
+  }
+
   getAllFees(){
     this.http.get(`${config.apiUrl}/fees`).subscribe((res:any)=>{
       this.dataSource = res.data;
     })
+  }
+
+  formatDate(date){
+    return this.datepipe.transform(new Date(date), 'yyyy-MM-dd');
   }
 
   deleteFee(id){
@@ -54,6 +73,8 @@ export class FeesComponent implements OnInit {
     form.append("stud_id", this.fee.get("stud_id").value);
     form.append("amount", this.fee.get("amount").value);
     form.append("date", this.fee.get("date").value);
+    form.append("total_paid", this.fee.get("total_paid").value);
+    form.append("installments", this.fee.get("installments").value);
     if(this.editMode){
       form.append("_method", "PUT");
       form.append("id", this.editingObject.id);
@@ -61,12 +82,16 @@ export class FeesComponent implements OnInit {
         this.getAllFees();
         this.fee.reset();
         this.snackBar.open("Updated", "Ok", {duration:2000})
+      },err=>{
+        this.snackBar.open("You entered studented number is invalid!", "Ok", {duration:2000})
       })
     }else{
       this.http.post(`${config.apiUrl}/fees`, form).subscribe(res=>{
         this.getAllFees();
         this.fee.reset();
         this.snackBar.open("Inserted", "Ok", {duration:2000})
+      },err=>{
+        this.snackBar.open("You entered studented number is invalid!", "Ok", {duration:2000})
       })
     }
   }
@@ -77,12 +102,16 @@ export class FeesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "stud_id", "amount", "date", "action"];
+    this.dataColumns = ["id", "stud_id", "stud_name", 'amount_of_course', "total_paid", "reaining_paid", "last_payment_date", "number_of_installements", "remaining_installenments", "monthly_fee", 'is_payment_due', "action"];
     this.getAllFees();
   }
 
   ngAfterViewInit() {
 
+  }
+
+  public checkError = (controlName: string, errorName: string) => {
+    return this.fee.controls[controlName].hasError(errorName);
   }
 
 }
