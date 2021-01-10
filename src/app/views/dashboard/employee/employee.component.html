@@ -77,7 +77,7 @@
 
         <div class="row">
           <div class="column">
-              <mat-form-field class="full-width" appearance="outline">
+              <!-- <mat-form-field class="full-width" appearance="outline">
                   <mat-label>CLass</mat-label>
                   <input
                     matInput
@@ -87,6 +87,16 @@
                     placeholder="Class"
                   />
                   <mat-error *ngIf="checkError('address', 'required')">Please enter the class</mat-error>
+                </mat-form-field> -->
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Class</mat-label>
+                  <mat-select formControlName="class"
+                  name="class">
+                      <mat-option *ngFor="let item of classes" [value]="item.id">
+                          {{item.name}}
+                      </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="checkError('class', 'required')">Please select class</mat-error>
                 </mat-form-field>
           </div>
           <div class="column">

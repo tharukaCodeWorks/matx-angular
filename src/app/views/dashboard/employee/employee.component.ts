@@ -14,6 +14,7 @@ export class EmployeeComponent implements OnInit {
   selectedIndex = 1;
   editMode = false;
   editingObject:any = {};
+  classes=[];
   designation = [
     "Manager",
     "Assistant Manager",
@@ -79,6 +80,12 @@ export class EmployeeComponent implements OnInit {
     })
   }
 
+  getAllClasses(){
+    this.http.get(`${config.apiUrl}/classes`).subscribe((res:any)=>{
+      this.classes = res.data;
+    });
+  }
+
   newEmployee(){
     let form = new FormData();
     form.set("name", this.employee.get("name").value);
@@ -114,6 +121,7 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.dataColumns = ["id", "name", "class", "email", "address", "contact", "designation", "department", "action"];
     this.getAllEmployees();
+    this.getAllClasses();
   }
 
   ngAfterViewInit() {
