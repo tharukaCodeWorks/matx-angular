@@ -64,6 +64,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.caffeIncome = preparedData;
       });
+      if(res.data.length==0){
+        this.caffeIncome = [];
+      }
     });
   }
 
@@ -79,6 +82,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.caffeExpense = preparedData;
       });
+      if(res.data.length==0){
+        this.caffeExpense = [];
+      }
     });
   }
 
@@ -94,6 +100,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.monthlyIncome = preparedData;
       });
+      if(res.data.length==0){
+        this.monthlyIncome = [];
+      }
     });
   }
 
@@ -109,6 +118,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.monthlyExpenses = preparedData;
       });
+      if(res.data.length==0){
+        this.monthlyExpenses = [];
+      }
     });
   }
 
@@ -124,6 +136,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.studentAttendance = preparedData;
       });
+      if(res.data.length==0){
+        this.studentAttendance = [];
+      }
     });
   }
 
@@ -139,6 +154,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.staffAttendance = preparedData;
       });
+      if(res.data.length==0){
+        this.staffAttendance = [];
+      }
     });
   }
 
@@ -150,6 +168,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.classReport = res.data;
       });
+      if(res.data.length==0){
+        this.classReport = [];
+      }
     });
   }
 
@@ -165,6 +186,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.single = preparedData;
       });
+      if(res.data.length==0){
+        this.single = [];
+      }
     });
   }
 
@@ -180,6 +204,9 @@ export class ReportsComponent implements OnInit {
         console.log(this.caffeIncome);
         this.inquiries = preparedData;
       });
+      if(res.data.length==0){
+        this.inquiries = [];
+      }
     });
   }
 
@@ -187,6 +214,10 @@ export class ReportsComponent implements OnInit {
     let startOfMonth;
     let endOfMonth;
     switch(this.dateRange){
+      case "this":
+        startOfMonth = moment().startOf('month').format('DD-MM-YYYY');
+        endOfMonth   = moment().endOf('month').format('DD-MM-YYYY');
+        return {start: startOfMonth, end:endOfMonth};
       case "year":
         startOfMonth = moment().subtract(1,'years').clone().startOf('year').format('DD-MM-YYYY');
         endOfMonth   = moment().subtract(1,'years').clone().endOf('year').format('DD-MM-YYYY');

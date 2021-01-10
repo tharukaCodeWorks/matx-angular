@@ -7,8 +7,8 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Time Range</mat-label>
                         <mat-select [(value)]="dateRange" (selectionChange)="getCaffeSalesChartData()">
-                            <mat-option value="week">
-                                Last Week
+                            <mat-option value="this">
+                                This Month
                             </mat-option>
                             <mat-option value="month">
                                 Last Month
@@ -46,8 +46,8 @@
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Time Range</mat-label>
                                 <mat-select [(value)]="timeRange">
-                                    <mat-option value="week">
-                                        Last Week
+                                    <mat-option value="this">
+                                        This Month
                                     </mat-option>
                                     <mat-option value="month">
                                         Last Month
@@ -244,8 +244,8 @@
                     <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
                         <mat-select [(value)]="dateRange" (selectionChange)="getCaffeExpenseData()">
-                            <mat-option value="week">
-                                Last Week
+                            <mat-option value="this">
+                                This Month
                             </mat-option>
                             <mat-option value="month">
                                 Last Month
@@ -480,8 +480,8 @@
                     <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
                         <mat-select [(value)]="dateRange" (selectionChange)="getInstituteSalesData()">
-                            <mat-option value="week">
-                                Last Week
+                            <mat-option value="this">
+                                This Month
                             </mat-option>
                             <mat-option value="month">
                                 Last Month
@@ -519,8 +519,8 @@
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Time Range</mat-label>
                                 <mat-select [(value)]="timeRange">
-                                    <mat-option value="week">
-                                        Last Week
+                                    <mat-option value="this">
+                                        This Month
                                     </mat-option>
                                     <mat-option value="month">
                                         Last Month
@@ -672,8 +672,8 @@
                     <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
                         <mat-select [(value)]="dateRange" (selectionChange)="getInstituteExpenseData()">
-                            <mat-option value="week">
-                                Last Week
+                            <mat-option value="this">
+                                This Month
                             </mat-option>
                             <mat-option value="month">
                                 Last Month
@@ -734,8 +734,8 @@
                             <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Time Range</mat-label>
                                 <mat-select [(value)]="timeRange">
-                                    <mat-option value="week">
-                                        Last Week
+                                    <mat-option value="this">
+                                        This Month
                                     </mat-option>
                                     <mat-option value="month">
                                         Last Month
@@ -917,8 +917,8 @@
                     <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
                         <mat-select [(value)]="dateRange" (selectionChange)="getStudentRegistrationData()">
-                            <mat-option value="week">
-                                Last Week
+                            <mat-option value="this">
+                                This Month
                             </mat-option>
                             <mat-option value="month">
                                 Last Month
@@ -1137,8 +1137,8 @@
             <mat-form-field [(value)]="dateRange" appearance="outline">
                 <mat-label>Time Range</mat-label>
                 <mat-select [(value)]="dateRange" (selectionChange)="getStudentAttendance()">
-                    <mat-option value="week">
-                        Last Week
+                    <mat-option value="this">
+                        This Month
                     </mat-option>
                     <mat-option value="month">
                         Last Month
@@ -1176,8 +1176,8 @@
             <mat-form-field [(value)]="dateRange" appearance="outline">
                 <mat-label>Time Range</mat-label>
                 <mat-select [(value)]="dateRange" (selectionChange)="getStaffAttendance()">
-                    <mat-option value="week">
-                        Last Week
+                    <mat-option value="this">
+                        This Month
                     </mat-option>
                     <mat-option value="month">
                         Last Month
@@ -1215,8 +1215,8 @@
             <mat-form-field [(value)]="dateRange" appearance="outline">
                 <mat-label>Time Range</mat-label>
                 <mat-select [(value)]="dateRange" (selectionChange)="getClassAttendance()">
-                    <mat-option value="week">
-                        Last Week
+                    <mat-option value="this">
+                        This Month
                     </mat-option>
                     <mat-option value="month">
                         Last Month
@@ -1283,8 +1283,8 @@
             <mat-form-field [(value)]="dateRange" appearance="outline">
                 <mat-label>Time Range</mat-label>
                 <mat-select [(value)]="dateRange" (selectionChange)="getInquiries()">
-                    <mat-option value="week">
-                        Last Week
+                    <mat-option value="this">
+                        This Month
                     </mat-option>
                     <mat-option value="month">
                         Last Month
@@ -1325,7 +1325,7 @@
                 showXAxisLabel="true"
                 showYAxisLabel="true"
                 xAxisLabel="Month"
-                yAxisLabel="Attendance"
+                yAxisLabel="Inquiries Count"
                >
             </ngx-charts-bar-vertical>
         </div>
