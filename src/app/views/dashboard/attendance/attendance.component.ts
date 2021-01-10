@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -32,7 +33,7 @@ export class AttendanceComponent implements OnInit {
 
   dataSource:any = [];
 
-  constructor(private http:HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private http:HttpClient, private snackBar: MatSnackBar, private datepipe:DatePipe) {}
 
   ngOnInit(): void {
     this.dataColumns = ["id", "user_type", "user_number", "name", "date", "status"];
@@ -59,6 +60,10 @@ export class AttendanceComponent implements OnInit {
     },error=>{
       this.snackBar.open("Sorry, I can't find any user assosiated with the user number!", "Ok", {duration:2000});
     });
+  }
+
+  formatDate(date){
+    return this.datepipe.transform(new Date(date), 'yyyy-MM-dd');
   }
 
   getUserType(model){

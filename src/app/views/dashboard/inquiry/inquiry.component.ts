@@ -15,7 +15,7 @@ export class InquiryComponent implements OnInit {
 
   selectedIndex = 1;
   editMode = false;
-  editingObject = {};
+  editingObject:any = {};
   class = new FormGroup({
     id: new FormControl('', Validators.required),
     inquiry: new FormControl('', Validators.required),
@@ -38,9 +38,11 @@ export class InquiryComponent implements OnInit {
     this.selectedIndex = 0;
     this.editMode = true;
     this.editingObject = data;
+    console.log(data);
     this.class.patchValue({
-      ...data,
-      id: data.student.id
+      inquiry: data.inquiry,
+      status: `${data.status}`,
+      id: data.student_id
     });
   }
 
@@ -114,14 +116,21 @@ export class InquiryComponent implements OnInit {
     let data = {
       id: this.class.get("id").value,
       inquiry: this.class.get("inquiry").value,
-      status: this.class.get("status").value=="true"?true:false
+      status: this.class.get("status").value=="true"?true:false,
     };
-
-    this.http.post(`${config.apiUrl}/inquires`, data).subscribe(res=>{
-      this.getAllClasses();
-      this.snackBar.open("Created", "Ok", {duration:2000});
-      this.class.reset();
-    });
+    if(this.editMode){
+      this.http.put(`${config.apiUrl}/inquires/${this.editingObject.id}`, data).subscribe(res=>{
+        this.getAllClasses();
+        this.snackBar.open("Updated", "Ok", {duration:2000});
+        this.class.reset();
+      });
+    }else{
+      this.http.post(`${config.apiUrl}/inquires`, data).subscribe(res=>{
+        this.getAllClasses();
+        this.snackBar.open("Created", "Ok", {duration:2000});
+        this.class.reset();
+      });
+    }
   }
 
   ngOnInit(): void {

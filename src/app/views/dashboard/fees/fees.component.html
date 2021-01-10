@@ -189,6 +189,9 @@
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
                         <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> 
+                           <button mat-icon-button color="primary" aria-label="Pay" (click)="payFee(row)">
+                            <mat-icon>money</mat-icon>   
+                          </button>
                             <button mat-icon-button color="primary" aria-label="Edit" (click)="updateSelect(row)">
                                 <mat-icon>edit</mat-icon>   
                             </button>

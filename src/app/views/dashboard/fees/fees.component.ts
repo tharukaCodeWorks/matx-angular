@@ -68,6 +68,19 @@ export class FeesComponent implements OnInit {
     });
   }
 
+  payFee(row){
+    let form = new FormData();
+    form.append("stud_id", row.stud_id)
+    form.append("total_paid", row.total_paid)
+    this.http.post(`${config.apiUrl}/fees`, form).subscribe(res=>{
+      this.getAllFees()
+      this.fee.reset();
+      this.snackBar.open("Mark as paid", "Ok", {duration:2000})
+    },err=>{
+      this.snackBar.open("Something went wrong", "Ok", {duration:2000})
+    })
+  }
+
   newFee(){
     let form = new FormData();
     form.append("stud_id", this.fee.get("stud_id").value);
