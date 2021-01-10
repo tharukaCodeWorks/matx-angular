@@ -17,7 +17,6 @@ export class ExpensesComponent implements OnInit {
   editingObject:any = {};
   
   employee = new FormGroup({
-    stud_id: new FormControl('', [Validators.required]),
     amount: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
     detail: new FormControl('', Validators.required)

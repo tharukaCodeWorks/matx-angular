@@ -47,6 +47,8 @@ export class EmployeeComponent implements OnInit {
     contact: new FormControl('', Validators.required),
     designation: new FormControl('', Validators.required),
     department: new FormControl('', Validators.required),
+    class: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
   });
 
   dataColumns = [];
@@ -84,6 +86,8 @@ export class EmployeeComponent implements OnInit {
     form.set("designation", this.employee.get("designation").value);
     form.set("department", this.employee.get("department").value);
     form.set("contact", this.employee.get("contact").value);
+    form.set("class", this.employee.get("class").value);
+    form.set("email", this.employee.get("email").value);
     if(this.editMode){
       form.set("id", this.editingObject.employee_id);
       form.set("_method", "PUT");
@@ -108,7 +112,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "name", "address", "contact", "designation", "department", "action"];
+    this.dataColumns = ["id", "name", "class", "email", "address", "contact", "designation", "department", "action"];
     this.getAllEmployees();
   }
 

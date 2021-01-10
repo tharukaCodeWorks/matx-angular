@@ -6,7 +6,7 @@
                 <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
                     <mat-form-field appearance="outline">
                         <mat-label>Time Range</mat-label>
-                        <mat-select>
+                        <mat-select [(value)]="dateRange" (selectionChange)="getCaffeSalesChartData()">
                             <mat-option value="week">
                                 Last Week
                             </mat-option>
@@ -241,9 +241,9 @@
         <mat-tab-group>
             <mat-tab label="Chart">
                 <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
-                        <mat-select>
+                        <mat-select [(value)]="dateRange" (selectionChange)="getCaffeExpenseData()">
                             <mat-option value="week">
                                 Last Week
                             </mat-option>
@@ -477,9 +477,9 @@
         <mat-tab-group>
             <mat-tab label="Chart">
                 <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
-                        <mat-select>
+                        <mat-select [(value)]="dateRange" (selectionChange)="getInstituteSalesData()">
                             <mat-option value="week">
                                 Last Week
                             </mat-option>
@@ -669,9 +669,9 @@
         <mat-tab-group>
             <mat-tab label="Chart">
                 <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
-                        <mat-select>
+                        <mat-select [(value)]="dateRange" (selectionChange)="getInstituteExpenseData()">
                             <mat-option value="week">
                                 Last Week
                             </mat-option>
@@ -689,6 +689,28 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Date range</mat-label>
+                        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                            <input matStartDate placeholder="Start date">
+                            <input matEndDate placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field> -->
+                    <!-- <mat-form-field color="accent" appearance="outline">
+                        <mat-label>From Date</mat-label>
+                        <input matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                    &nbsp;
+                    <mat-form-field color="accent" appearance="outline">
+                        <mat-label>To Date</mat-label>
+                        <input matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                    </mat-form-field> -->
                 </div>
 
                 <div class="chart-wrapper">
@@ -889,13 +911,12 @@
     </mat-tab>
 
     <mat-tab label="Student Registration">
-
         <mat-tab-group>
             <mat-tab label="Chart">
                 <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field [(value)]="dateRange" appearance="outline">
                         <mat-label>Time Range</mat-label>
-                        <mat-select>
+                        <mat-select [(value)]="dateRange" (selectionChange)="getStudentRegistrationData()">
                             <mat-option value="week">
                                 Last Week
                             </mat-option>
@@ -1108,6 +1129,206 @@
                 
             </mat-tab>
         </mat-tab-group>
+    </mat-tab>
+
+
+    <mat-tab label="Student Attendance">
+        <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+            <mat-form-field [(value)]="dateRange" appearance="outline">
+                <mat-label>Time Range</mat-label>
+                <mat-select [(value)]="dateRange" (selectionChange)="getStudentAttendance()">
+                    <mat-option value="week">
+                        Last Week
+                    </mat-option>
+                    <mat-option value="month">
+                        Last Month
+                    </mat-option>
+                    <mat-option value="six_month">
+                        Last Six Months
+                    </mat-option>
+                    <mat-option value="year">
+                        Last Year
+                    </mat-option>
+                    <mat-option value="five_year">
+                        Last Five Year
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="studentAttendance"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Attendance"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Staff Attendance">
+        <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+            <mat-form-field [(value)]="dateRange" appearance="outline">
+                <mat-label>Time Range</mat-label>
+                <mat-select [(value)]="dateRange" (selectionChange)="getStaffAttendance()">
+                    <mat-option value="week">
+                        Last Week
+                    </mat-option>
+                    <mat-option value="month">
+                        Last Month
+                    </mat-option>
+                    <mat-option value="six_month">
+                        Last Six Months
+                    </mat-option>
+                    <mat-option value="year">
+                        Last Year
+                    </mat-option>
+                    <mat-option value="five_year">
+                        Last Five Year
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="staffAttendance"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Attendance"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Class Reports">
+        <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+            <mat-form-field [(value)]="dateRange" appearance="outline">
+                <mat-label>Time Range</mat-label>
+                <mat-select [(value)]="dateRange" (selectionChange)="getClassAttendance()">
+                    <mat-option value="week">
+                        Last Week
+                    </mat-option>
+                    <mat-option value="month">
+                        Last Month
+                    </mat-option>
+                    <mat-option value="six_month">
+                        Last Six Months
+                    </mat-option>
+                    <mat-option value="year">
+                        Last Year
+                    </mat-option>
+                    <mat-option value="five_year">
+                        Last Five Year
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="classAttendance"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Attendance"
+               >
+            </ngx-charts-bar-vertical>
+        </div> -->
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="classReport" matSort >
+      
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="id"> {{row.id}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="class_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Class Name </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="progress"> {{row.name}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="student_count">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Student Count </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="progress"> {{row.students_count}} </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="lecturer_name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Lecturer Name </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="progress"> {{row.lecturer==null?'N/A':row.lecturer.name}} </mat-cell>
+                </ng-container>
+                
+                <mat-header-row *matHeaderRowDef="dataColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: dataColumns;">
+                </mat-row>
+            </mat-table>
+            
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Inquiries">
+        <div style="margin-right: 10px; margin-top: 10px; margin-left: 10px;">
+            <mat-form-field [(value)]="dateRange" appearance="outline">
+                <mat-label>Time Range</mat-label>
+                <mat-select [(value)]="dateRange" (selectionChange)="getInquiries()">
+                    <mat-option value="week">
+                        Last Week
+                    </mat-option>
+                    <mat-option value="month">
+                        Last Month
+                    </mat-option>
+                    <mat-option value="six_month">
+                        Last Six Months
+                    </mat-option>
+                    <mat-option value="year">
+                        Last Year
+                    </mat-option>
+                    <mat-option value="five_year">
+                        Last Five Year
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- &nbsp;<mat-form-field appearance="outline">
+                <mat-label>Filter by status</mat-label>
+                <mat-select [(value)]="inquiryStatus" (selectionChange)="filterInquiryByStatus()">
+                  <mat-option value="all">
+                    All
+                  </mat-option>
+                  <mat-option value="true">
+                    Resolved
+                  </mat-option>
+                  <mat-option value="false">
+                    Not Resolved
+                  </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+        </div>
+        <div class="chart-wrapper">
+            <ngx-charts-bar-vertical
+                [results]="inquiries"
+                gradient="false"
+                xAxis="true"
+                yAxis="true"
+                legend="true"
+                showXAxisLabel="true"
+                showYAxisLabel="true"
+                xAxisLabel="Month"
+                yAxisLabel="Attendance"
+               >
+            </ngx-charts-bar-vertical>
+        </div>
     </mat-tab>
 
 </mat-tab-group>

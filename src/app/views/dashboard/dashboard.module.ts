@@ -24,6 +24,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ReportsComponent } from './reports/reports/reports.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ExpensesComponent } from './expenses/expenses.component';
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import { ExpensesComponent } from './expenses/expenses.component';
     RouterModule.forChild(DashboardRoutes),
     ReactiveFormsModule,
     MatSnackBarModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [AnalyticsComponent, StudentComponent, EmployeeComponent, FeesComponent, CaffeComponent, AttendanceComponent, InquiryComponent, ClassComponent, ReportsComponent, ExpensesComponent],
   exports: [],

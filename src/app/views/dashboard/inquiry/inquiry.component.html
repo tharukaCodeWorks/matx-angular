@@ -56,8 +56,22 @@
 
     <mat-tab label="Inquiry List">
         <div class="ml-05 mr-05 mt-05 pb-1">
+          <mat-form-field appearance="outline">
+              <mat-label>Filter by status</mat-label>
+              <mat-select [(value)]="inquiryStatus" (selectionChange)="filterInquiryByStatus()">
+                <mat-option value="all">
+                  All
+                </mat-option>
+                <mat-option value="true">
+                  Resolved
+                </mat-option>
+                <mat-option value="false">
+                  Not Resolved
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
             <div class="mat-elevation-z8">
-                <mat-table [dataSource]="dataSource" matSort >
+                <mat-table [dataSource]="filteredDataSource" matSort >
           
                     <ng-container matColumnDef="id">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
@@ -71,12 +85,17 @@
 
                     <ng-container matColumnDef="student_name">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> Student Name </mat-header-cell>
-                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.student.firstname}} {{row.student.lastname}} </mat-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{row.student==null?'N/A':row.student.firstname +" "+ row.student.lastname}} </mat-cell>
                     </ng-container>
                     
                     <ng-container matColumnDef="inquiry">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> Inquiry </mat-header-cell>
                       <mat-cell *matCellDef="let row" data-label="progress"> {{row.inquiry}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="created_date">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="progress"> {{formatDate(row.created_at)}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="status">

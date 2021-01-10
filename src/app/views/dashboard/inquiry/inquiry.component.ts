@@ -1,8 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { config } from 'config';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-inquiry',
@@ -22,9 +24,15 @@ export class InquiryComponent implements OnInit {
 
   dataColumns = [];
 
+  inquiryStatus:any = 'all';
+
   dataSource:any = [];
 
-  constructor(private http:HttpClient, private snackBar:MatSnackBar) {}
+  filteredDataSource: any = [];
+
+  // dateRange="year";
+
+  constructor(private http:HttpClient, private snackBar:MatSnackBar, public datepipe: DatePipe) {}
 
   updateSelect(data){
     this.selectedIndex = 0;
@@ -36,11 +44,60 @@ export class InquiryComponent implements OnInit {
     });
   }
 
+
+  formatDate(date){
+    return this.datepipe.transform(new Date(date), 'yyyy-MM-dd');
+  }
+
+  filterInquiryByStatus(){
+    if(this.inquiryStatus=="all"){
+      this.filteredDataSource =  this.dataSource;
+    }else if(this.inquiryStatus=='true'){
+      this.filteredDataSource = this.dataSource.filter((item)=>{
+        return item.status==true;
+      });
+    }else if(this.inquiryStatus=='false'){
+      this.filteredDataSource = this.dataSource.filter((item)=>{
+        return item.status==false;
+      });
+    }
+  }
+
   getAllClasses(){
     this.http.get(`${config.apiUrl}/inquires`).subscribe((res:any)=>{
       this.dataSource = res.data;
+      this.filterInquiryByStatus();
     });
   }
+
+  // selectDateRange(){
+  //   let startOfMonth;
+  //   let endOfMonth;
+  //   switch(this.dateRange){
+  //     case "year":
+  //       startOfMonth = moment().subtract(1,'years').clone().startOf('year').format('DD-MM-YYYY');
+  //       endOfMonth   = moment().subtract(1,'years').clone().endOf('year').format('DD-MM-YYYY');
+  //       return {start: startOfMonth, end:endOfMonth};
+  //       // break;
+  //     case "month":
+  //       startOfMonth = moment().subtract(1,'months').startOf('month').format('DD-MM-YYYY');
+  //       endOfMonth   = moment().subtract(1,'months').endOf('month').format('DD-MM-YYYY');
+  //       return {start: startOfMonth, end:endOfMonth};
+  //       // break;
+  //     case "five_year":
+  //       startOfMonth = moment().subtract(5,'years').startOf('month').format('DD-MM-YYYY');
+  //       endOfMonth   = moment().clone().endOf('month').format('DD-MM-YYYY');
+  //       return {start: startOfMonth, end:endOfMonth};
+  //       // break;
+  //     case "six_month":
+  //       startOfMonth = moment().subtract(6,'months').startOf('month').format('DD-MM-YYYY');
+  //       endOfMonth   = moment().endOf('month').format('DD-MM-YYYY');
+  //       return {start: startOfMonth, end:endOfMonth};
+  //       // break;
+  //     default:
+  //       return {start: startOfMonth, end:endOfMonth};
+  //   }
+  // }
 
   cancelEditMode(){
     this.editMode = false;
@@ -68,7 +125,7 @@ export class InquiryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataColumns = ["id", "student_id", "student_name", "status","inquiry", "action"];
+    this.dataColumns = ["id", "student_id", "student_name", "created_date","status","inquiry", "action"];
     this.getAllClasses();
   }
 
