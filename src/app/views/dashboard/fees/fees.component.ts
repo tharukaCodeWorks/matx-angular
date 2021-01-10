@@ -71,7 +71,7 @@ export class FeesComponent implements OnInit {
   payFee(row){
     let form = new FormData();
     form.append("stud_id", row.stud_id)
-    form.append("total_paid", row.total_paid)
+    form.append("total_paid", row.monthly_fee)
     this.http.post(`${config.apiUrl}/fees`, form).subscribe(res=>{
       this.getAllFees()
       this.fee.reset();
